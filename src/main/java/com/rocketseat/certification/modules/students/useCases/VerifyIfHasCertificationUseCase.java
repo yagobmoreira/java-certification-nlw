@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VerifyIfHasCertificationUseCase {
-  private CertificationStudentRepository repository;
+  private final CertificationStudentRepository repository;
 
   @Autowired
   public VerifyIfHasCertificationUseCase(CertificationStudentRepository repository) {
@@ -15,7 +15,11 @@ public class VerifyIfHasCertificationUseCase {
   }
 
   public boolean execute(VerifyHasCertificationDTO dto) {
-    var result = this.repository.findByStudentEmailAndTechnology(dto.getEmail(), dto.getTechnology());
-    return !result.isEmpty();
+    var result = this.repository.findByStudentEmailAndTechnology(dto.getEmail(),
+        dto.getTechnology());
+    if (!result.isEmpty()) {
+      return true;
+    }
+    return false;
   }
 }

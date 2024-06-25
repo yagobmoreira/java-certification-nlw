@@ -24,7 +24,6 @@ public class AlternativesEntity {
 
   private String description;
 
-  @Column(name = "is_correct")
   private boolean isCorrect;
 
   @CreationTimestamp
